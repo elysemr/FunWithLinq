@@ -7,7 +7,26 @@ namespace FunWithLinq
     {
         static void Main(string[] args)
         {
-            //create collection of ints
+            var customers = new List<Customer>() {
+                new Customer { Id = 1, Name = "Amazon" },
+                new Customer { Id = 2, Name = "Target" },
+                new Customer { Id = 3, Name = "Microsoft" }
+  };
+            var orders = new List<Order>() {
+                new Order { Id = 1, Description = "1st Order", Sales = 1000, CustomerId = 1 },
+                new Order { Id = 2, Description = "2nd Order", Sales = 2000, CustomerId = 3 },
+                new Order { Id = 3, Description = "3rd Order", Sales = 3000, CustomerId = 2 }
+            };
+
+
+
+
+
+
+
+        }
+        static void X() { 
+        //create collection of ints
             int[] ints = new int[]
             {
                 620, 849, 649, 989, 993, 524, 216, 173, 136, 482,
@@ -22,16 +41,34 @@ namespace FunWithLinq
                 303, 104, 538, 426, 150, 843, 943, 864, 694, 639
             };
 
-            var newSum = ints.Sum() - ints.Max() - ints.Min();
-            var amendedAvg = newSum / (ints.Count() - 2.0); //need () for right answer because of division with subtraction,
-                                                            //did 2.0 to return a decimal instead of an int
-            Console.WriteLine(amendedAvg);
+            //var newSum = ints.Sum() - ints.Max() - ints.Min();
+            //var amendedAvg = newSum / (ints.Count() - 2.0); //need () for right answer because of division with subtraction,
+            //                                                //did 2.0 to return a decimal instead of an int
+            //Console.WriteLine(amendedAvg);
 
-            Console.WriteLine($"Avg is {ints.Average()}"); //always use variable name with linq method
-                                                           //takes integers in but outputs a double
-            Console.WriteLine($"Highest is {ints.Max()} and lowest is {ints.Min()}");
-            Console.WriteLine($"There are {ints.Count()} ints in this array.");
-           
+            //Console.WriteLine($"Avg is {ints.Average()}"); //always use variable name with linq method
+            //                                               //takes integers in but outputs a double
+            //Console.WriteLine($"Highest is {ints.Max()} and lowest is {ints.Min()}");
+            //Console.WriteLine($"There are {ints.Count()} ints in this array.");
+
+            //query language 
+            //var avgfun = from num in ints where num < ints.Average() 
+            //             orderby num descending select num;
+            //foreach (var a in avgfun)
+            //{
+            //Console.Write($"{a}, ");
+            //}
+
+            var avgfun2 = (from i in ints where i < ints.Average() orderby i descending select i).Sum();
+            Console.WriteLine($"Sum is {avgfun2}");
+
+            //var avgfun = ints.Where(i => i < ints.Average()).Sum(i);
+            //foreach (var i in avgfun)
+            //{
+            //    Console.Write($"{i}, ");
+
+            //}
+
         }
     }
 }
