@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace FunWithLinq
@@ -18,7 +19,14 @@ namespace FunWithLinq
                 new Order { Id = 3, Description = "3rd Order", Sales = 3000, CustomerId = 2 }
             };
 
-
+            var megatable = from o in orders
+                            join c in customers
+                            on o.CustomerId equals c.Id
+                            select new { o, c };
+            foreach(var co in megatable)
+            {
+                Console.WriteLine($"{co.c.Name} | {co.o.Description} | {co.o.Sales}");
+            }
 
 
 
